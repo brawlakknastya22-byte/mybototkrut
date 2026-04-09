@@ -1,3 +1,17 @@
+import os
+
+ACCESS_TOKEN = os.environ.get("VK_TOKEN")
+GROUP_ID = os.environ.get("GROUP_ID")
+
+# Проверка: напечатает в логах хостинга, что получилось
+print(f"Токен загружен: {'ДА' if ACCESS_TOKEN else 'НЕТ'}")
+print(f"ID группы: {GROUP_ID}")
+
+if not ACCESS_TOKEN or not GROUP_ID:
+    print("ОШИБКА: Не найдены переменные окружения VK_TOKEN или GROUP_ID")
+    exit(1)
+
+GROUP_ID = int(GROUP_ID)  # Преобразуем в число
 import vk_api
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 import random
@@ -6,8 +20,8 @@ import re
 # ==================================================
 # НАСТРОЙКИ - ЗАМЕНИТЕ НА СВОИ ЗНАЧЕНИЯ!
 # ==================================================
-ACCESS_TOKEN = "vk.tokkkkk....."  # Ваш токен доступа (см. шаг 2)
-GROUP_ID = 5555555            # ID сообщества (например, 123456789)
+ACCESS_TOKEN = os.environ.get("VK_TOKEN") # Ваш токен доступа (см. шаг 2)
+GROUP_ID = int(os.environ.get("GROUP_ID"))          # ID сообщества (например, 123456789)
 
 # ID администраторов (можно узнать через vk.com/dev)
 ADMINS = []  # Например: [123456789, 987654321]
